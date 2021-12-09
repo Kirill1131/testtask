@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Istok+Web&display=swap');
+
+body{
+  /*
+  background: #f1f1f9;
+  background: #0401;
+  */
+}
+
+/*
+
+.active{
+  background: #f00;
+  transition: .5s;
+}
+.inactive{
+  background: #00f;
+  transition: .5s;
+}
+*/
+.bg-1{
+  background: #0402;
+
+}
+.logo{
+  padding: 20px 70px 20px 70px;
+}
+.navbar-brand-logo{
+
+  font-size: 25px;
+  font-family: 'Ubuntu', sans-serif;
+  font-style: italic;
+  color:#0209;
+  text-decoration: none;
+}
+
+.active{
+  background: #0201;
+  background: #0801;
+  border-radius: 15px;
+}
+
+.active-letter{
+
+  color:#555;
+}
+.inactive-letter{
+  color:#0202;
+}
+.wrong-letter{
+  color:#f00;
+}
+
+
+.type-space{
+  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Istok Web', sans-serif;
+
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px 40px;
+  line-height: 30px;
+  box-shadow: 0px 0px 5px 1px #0002;
+  font-size: 26px;
+  letter-spacing: 2.5px;
+  /*
+  box-shadow: 0px 0px 2px 5px #0005;
+  */
+}
+.flex-row{
+  display:flex;
+}
+.type-info-item{
+  padding: 10px;
+  font-family: sans-serif;
+  font-size: 16px;
+  /*
+  color:#fff;
+   */
+   color:#555;
+}
+.col{
+}
+.to-footer-sec{
+  background: #0402;
+  min-height: 500px;
+  padding: 40px 20px 0px 20px;
+}
+.nav-item{
+  font-size: 20px;
+  padding: 10px;
+}
+
+
+.keyboard{
+  background: #fff9;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px 1px #0002;
+  display:inline-block;
+  margin: 40px auto 40px auto;
+}
+.keyboard-item{
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 1px #0002;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+}
+.keyboard-square-item{
+  /*
+  padding: 10px;
+  border: 1px solid #0004;
+  */
+  width: 40px;
+  height: 40px;
+
+}
+.keyboard-grow-item{
+  flex-grow: 1;
+  height: 40px;
+}
+.keyboard-item-content{
+
+}
