@@ -1,0 +1,4 @@
+words.txt
+input_lat.txt
+lessons_lat
+5
