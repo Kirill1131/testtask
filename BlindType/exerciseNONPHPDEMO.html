@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/css.css">
+    <script> </script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+
+    <title>Практика</title>
+    <!--link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"-->
+  </head>
+  <body>
+    <div class="" id = "message_box">
+      <div class="message-box-container" v-show="active">
+        <div class="relative-container">
+
+          <div class="flex-column-container relative-container flex-center">
+            <div class="flex-row flex-center">
+              <div class="message-box relative">
+                <close-button @c-event="onClose"></close-button>
+                <h1 class="message-header text-col-4">{{messageHeader}}</h1>
+                <div v-for="item in messageData" class="flex-row">
+                  <div class="message-item text-col-4" v-for="sub_item in item" class="">
+                    {{sub_item}}
+                  </div>
+                </div>
+
+                <div class="flex-row flex-center">
+                  <div class="flex-row flex-justify margin-top">
+                    <div v-for="btn in messageBtns">
+                      <dialog-button @c-event="onClose" v-bind:text="btn.text" v-bind:callback='btn.func'></dialog-button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-1">
+      <div class="container">
+        <div class="navbar-brand logo" id = "logo_span">
+          <span class="navbar-brand-logo">{{finalText}}</span>
+          <a class="navbar-brand-logo logo-span"  href="main.html">BLINDTYPE|</a>
+        </div>
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> -->
+        <div class="collapse navbar-collapse" id="">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="exercise.html">Практика</a>
+            <a class="nav-item nav-link" href="test.html">Тестирование</a>
+          </div>
+        </div>
+      </div>
+
+    </nav>
+
+    <div class="col to-footer-sec" id="app">
+      <!--div class="container" v-show = "!active">
+        <form class="" action="" method="post">
+          <label for="lesson">Раскладка:</label>
+          <select name="lesson" id="select_layout">
+            <option value="cyr">Кириллица</option>
+            <option value="lat">Латиница</option>
+          </select>
+          <label for="lesson">Урок:</label>
+          <select name="lesson" id="select_lesson">
+            <option value="1">1</option>
+          </select>
+          <label for="exercise">Упражнение:</label>
+          <select name="exercise" id="select_exercise">
+            <option value="1">1</option>
+          </select>
+          <input type="submit" name="" value="Приступить">
+        </form>
+      </div!-->
+      <div class="container" v-show="!active">
+        <h2 class="text-col-4">Список упражнений</h2>
+        <ul class="lessons-list">
+          <li v-for = "layout in lessonsData" class="lessons-list-sec">
+            <div class="">
+              <h5>{{layout.name}}</h5>
+            </div>
+            <ul class="overflow-y-scroll">
+              <li v-for = "lesson in layout.data" class="lessons-list-lesson">
+                <h6>{{lesson.name}}</h6>
+                <ul >
+                  <li v-for = "exercise in lesson.data" :data-layout-id = 'exercise.layNum' :data-less-id = 'exercise.lessNum' :data-ex-id='exercise.exNum' :data-path='exercise.path' :data-keyboard = 'exercise.langName' v-on:click='loadExercise' class="lessons-list-item">
+                    {{exercise.name}}
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="container" v-show="active">
+        <div class="flex-justify">
+          <div class="flex-row">
+            <div class="type-info-item">
+              {{mistakes_amount}} {{mistakesCountWord}}
+            </div>
+            <div class="type-info-item">
+              {{typing_speed}} знаков в минуту
+            </div>
+          </div>
+          <div class="flex-row">
+
+            <!-- <div  class="custom-btn flex-column-container flex-center" @click="isSound">
+              <div class="flex-row flex-center">
+                <div v-show="soundOn" class="">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#0209" class="btn-svg" viewBox="0 0 16 16">
+                    <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+                    <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+                    <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>
+                  </svg>
+                </div>
+                <div v-show="!soundOn" class="">
+                  <svg width="36" height="36" viewBox="0 0 16 16" class="btn-svg" fill="#0209" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04L4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04zm7.854.606a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708l4-4a.5.5 0 0 1 .708 0z"/>
+                    <path fill-rule="evenodd" d="M9.146 5.646a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0z"/>
+                  </svg>
+                </div>
+              </div>
+
+            </div> -->
+
+            <!-- <a class="type-info-item"  @click="backToList">
+              к списку уроков
+            </a> -->
+            <div class="custom-btn flex-column-container flex-center" @click="restart">
+              <div class="flex-row flex-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#0209" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                  <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="custom-btn flex-column-container flex-center" @click="backToList">
+              <div class="flex-row flex-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#0209" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="type-space">
+          <span class = "active-letter" v-for = "(item, index) in values">{{values[index]}}</span>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="keyboard-container"  id = "keyboard">
+
+        </div>
+      </div>
+    </div>
+
+
+    <footer class="w-100 py-4 flex-justify">
+        <div class="container py-4">
+            <div class="row gy-4 gx-5">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="h2 text-col-1">BLINDTYPE</h5>
+                    <p class="small text-muted">Приложение для тренировки слепой печати</p>
+                    <p class="small text-muted mb-0">&copy; 2021 </p>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-col-1 mb-3">Карта сайта</h4>
+                    <ul class="list-unstyled text-muted">
+                        <li><a href="exercise.html" class=" text-style-0">Практика</a></li>
+                        <li><a href="test.html" class=" text-style-0">Тестирование</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--div style="padding: 25px; border: 2px solid red; cursor:pointer;" onclick="clickB();">Загрузить текст</div-->
+    <script type="text/javascript" src="js/vue.js"></script>
+
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/message_box.js"></script>
+    <script type="text/javascript" src="js/keyboard.js"></script>
+    <script type="text/javascript" src="js/sound_handler.js"></script>
+    <!-- <script type="text/javascript" src="js/BlindTyper.js"></script> -->
+    <!-- <script type="text/javascript" src="js/exercise.js"></script> -->
+    <script type="text/javascript" src="js/exercise_nonphp.js"></script>
+
+
+    <script type="text/javascript" src="js/ui.js"></script>
+    <!--
+
+    <script type="text/javascript" src="js/keyboardPrev1.js"></script>
+    -->
+
+  </body>
+</html>

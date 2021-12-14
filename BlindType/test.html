@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!--link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"-->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/css.css">
+    <script> </script>
+
+  </head>
+  <body>
+    <div class="" id = "message_box">
+      <div class="message-box-container" v-show="active">
+        <div class="relative-container">
+
+          <div class="flex-column-container relative-container flex-center">
+            <div class="flex-row flex-center">
+              <div class="message-box relative">
+                <close-button @c-event="onClose"></close-button>
+                <h1 class="message-header text-col-4">{{messageHeader}}</h1>
+                <div v-for="item in messageData" class="flex-row">
+                  <div class="message-item text-col-4" v-for="sub_item in item" class="">
+                    {{sub_item}}
+                  </div>
+                </div>
+
+                <div class="flex-row flex-center">
+                  <div class="flex-row flex-justify margin-top">
+                    <div v-for="btn in messageBtns">
+                      <dialog-button @c-event="onClose" v-bind:text="btn.text" v-bind:callback='btn.func'></dialog-button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-1">
+      <div class="container">
+        <div class="navbar-brand logo" id = "logo_span">
+          <span class="navbar-brand-logo">{{finalText}}</span>
+          <a class="navbar-brand-logo logo-span"  href="main.html">BLINDTYPE|</a>
+        </div>
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <div class="collapse navbar-collapse" id="">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" href="exercise.html">Практика</a>
+            <a class="nav-item nav-link active" href="test.html">Тестирование</a>
+          </div>
+        </div>
+      </div>
+
+    </nav>
+
+
+
+    <div class="col to-footer-sec">
+      <div class="container" id = "app">
+        <div class="" v-show="!active">
+          <h3 class="text-col-4">Выберите клавиатуру</h3>
+          <div class="flex-row margin-bottom margin-top">
+            <choose-item v-for="item in langs" @c-event="loadTest" :name="item.name" :kbdshortname="item.kbdShortName" ></choose-item>
+          </div>
+        </div>
+        <div class="" v-show="active">
+          <div class="flex-row flex-justify">
+            <div class="flex-row">
+              <div class="type-info-item">
+                {{mistakes_amount}} {{mistakesCountWord}}
+              </div>
+              <div class="type-info-item">
+                {{typing_speed}} знаков в минуту
+              </div>
+              <div class="type-info-item">
+                точность {{accuracy}}%
+              </div>
+            </div>
+            <div class="flex-row">
+              <!-- <a class="type-info-item"  @click="backToList">
+                к списку уроков
+              </a> -->
+              <div class="custom-btn flex-column-container flex-center" @click="restart">
+                <div class="flex-row flex-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#0209" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="custom-btn flex-column-container flex-center" @click="backToList">
+                <div class="flex-row flex-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="type-space">
+            <span class = "active-letter" v-for = "(item, index) in values">{{values[index]}}</span>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <footer class="w-100 py-4 flex-justify">
+        <div class="container py-4">
+            <div class="row gy-4 gx-5">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="h2 text-col-1">BLINDTYPE</h5>
+                    <p class="small text-muted">Приложение для тренировки слепой печати</p>
+                    <p class="small text-muted mb-0">&copy; 2021 </p>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-col-1 mb-3">Карта сайта</h4>
+                    <ul class="list-unstyled text-muted">
+                        <li><a href="exercise.html">Практика</a></li>
+                        <li><a href="test.html">Тестирование</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--div style="padding: 25px; border: 2px solid red; cursor:pointer;" onclick="clickB();">Загрузить текст</div-->
+
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/vue.js"></script>
+    <!-- <script type="text/javascript" src="js/keyboard.js"></script> -->
+    <!-- <script type="text/javascript" src="js/BlindTyper.js"></script> -->
+    <script type="text/javascript" src="js/test.js"></script>
+    <script type="text/javascript" src="js/ui.js"></script>
+    <!--
+
+    <script type="text/javascript" src="js/keyboardPrev1.js"></script>
+    -->
+
+  </body>
+</html>

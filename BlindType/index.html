@@ -8,55 +8,8 @@
     <link rel="stylesheet" href="css/css.css">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-1">
-      <div class="navbar-brand logo">
-        <a class="navbar-brand-logo" href="#">BLINDTYPE|</a>
-      </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link " href="#">Теория</a>
-          <a class="nav-item nav-link" href="#">Практика</a>
-          <a class="nav-item nav-link active" href="#">Тестирование</a>
-          <a class="nav-item nav-link" href="#">Рейтинг</a>
-        </div>
-      </div>
-    </nav>
-
-    <div class="col to-footer-sec">
-      <div class="flex-row" id = "typing_info">
-        <div class="type-info-item">
-          {{mistakes_amount}} ошибок
-        </div>
-        <div class="type-info-item">
-          {{typing_speed}} знаков в минуту
-        </div>
-        <div class="type-info-item">
-          точность {{accuracy}}%
-        </div>
-      </div>
-      <div class="type-space" id = "type_space">
-        <span class = "active-letter" v-for = "(item, index) in values">{{values[index]}}</span>
-      </div>
-      <div class="container">
-        <div class="keyboard" id = "keyboard">
-
-        </div>
-      </div>
-
-    </div>
-
-
-    <footer>
-
-    </footer>
-
-    <!--div style="padding: 25px; border: 2px solid red; cursor:pointer;" onclick="clickB();">Загрузить текст</div-->
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/vue.js"></script>
-    <script type="text/javascript" src="js/keyboard.js"></script>
-    <script type="text/javascript" src="js/BlindTyper.js"></script>
+    <script type="text/javascript">
+      document.location.href = 'main.html';
+    </script>
   </body>
 </html>
